@@ -80,7 +80,7 @@ class ChatWindow(QMainWindow):
     def get_server(self):
         with open("server", "r") as f:
             host = f.read().strip()
-            return f'http://{host}:5000'
+            return f'http://{host}:4389'
 
     def play_notification_sound(self):
         subprocess.Popen('say -v Bells "beep"', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
