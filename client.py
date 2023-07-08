@@ -1,4 +1,5 @@
 import sys
+import subprocess
 from PyQt6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QLabel, QLineEdit, QPushButton, QTextBrowser
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
@@ -51,16 +52,19 @@ class ChatWindow(QMainWindow):
         self.socketio.connect(server)
 
     def send_message(self):
-        username = self.username_input.text()
+        self.username = self.username_input.text()
         message = self.message_input.text()
         self.message_input.clear()
-        self.socketio.emit('message', {'username': username, 'message': message})
+        self.socketio.emit('message', {'username': self.username, 'message': message})
 
     def handle_message(self, data):
         username = data['username']
         message = data['message']
         display_message = f"<b>{username}</b>: {message}<br>"
         self.chat_display.append(display_message)
+
+        if self.username != username:
+            self.play_notification_sound()
 
     def handle_connect(self):
         self.chat_display.append("<b>Connected to the chat server.</b><br>")
@@ -77,6 +81,9 @@ class ChatWindow(QMainWindow):
         with open("server", "r") as f:
             host = f.read().strip()
             return f'http://{host}:5000'
+
+    def play_notification_sound(self):
+        subprocess.Popen('say -v Bells "beep"', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 if __name__ == '__main__':
     chat_window = ChatWindow()
