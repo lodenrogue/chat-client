@@ -12,4 +12,4 @@
 
 ## Intel Mac
 
-If you're on intel mac you'll need to use the requirements_intel.txt and client_intel.py instead
+If you're on an Intel mac you'll need to use the requirements_intel.txt and client_intel.py instead
