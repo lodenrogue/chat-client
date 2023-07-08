@@ -2,8 +2,10 @@
 
 ## Instructions
 
-1. Install requirements
-2. Create a file in the application's directory named server
-3. Run python3 client.py
-4. Select a username
-5. Start chatting
+1. Make a venv
+2. pip install -r requirements.txt
+3. Create a file in the application's directory named server
+4. Add the server host name to the first line of that file
+5. Run python3 client.py
+6. Select a username
+7. Start chatting
